@@ -3,6 +3,10 @@ import os, ipaddress
 version = "ipv4"
 
 def is_ip_in_cidr(ip, cidr):
+    try:
+        ipaddress.ip_address(ip)
+    except ValueError:
+        return False
     ip_obj = ipaddress.ip_address(ip)
     network = ipaddress.ip_network(cidr)
     return ip_obj in network
